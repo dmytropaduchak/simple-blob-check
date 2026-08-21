@@ -1,0 +1,26 @@
+name: Simple Blob Check
+description: Warn when large image or binary files are added in a pull request.
+author: Dmytro Paduchak
+branding:
+  icon: file
+  color: yellow
+inputs:
+  github-token:
+    description: Token to read PR data and post sticky comments.
+    required: false
+    default: ${{ github.token }}
+  fail-on:
+    description: "none = report only; medium or high = fail when findings match."
+    required: false
+    default: none
+  max-bytes:
+    description: Max file size in bytes for binary extensions (when size is available).
+    required: false
+    default: "512000"
+  max-additions:
+    description: Max added lines for binary-looking files when size is missing.
+    required: false
+    default: "200"
+runs:
+  using: node20
+  main: dist/index.js
